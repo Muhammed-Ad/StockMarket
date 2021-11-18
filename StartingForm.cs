@@ -53,9 +53,14 @@ namespace StockMarketProject
 
         private void LoadDataButton_Click(object sender, EventArgs e)
         {
-
-            df = new StockDataForm();
-            //df.Text = StockNames[0] + " Data";
+            ///Validate that input field as put in
+            DateTimeOffset dto = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
+            string StartTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();
+            string EndTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();
+            string text = StocksComboBox.Text;
+            string Interval = PeriodComboBox.Text == "daily" ? "daily" : PeriodComboBox.Text == "weekly" ? "weekly" : PeriodComboBox.Text == "monthly" ? "monthly" : "";
+            df = new StockDataForm(text, StartTimeSinceEpoch, EndTimeSinceEpoch, Interval);
+            df.Text = text + " Data";
             df.Show();
         }
     }
