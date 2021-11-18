@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StockMarket.Properties;
 
 namespace StockMarketProject
 {
     public partial class StartingForm : Form
     {
         StockDataForm df;
-        string StockName;
+        string[] StockNames;
         public StartingForm()
         {
             InitializeComponent();
@@ -39,9 +40,13 @@ namespace StockMarketProject
                 //dataPoints[5]; //Adj. Close
                 //dataPoints[6]; //Volume
             }
+            //StockMarketProject.Properties.Resources.StockNames;
+
+            StockNames = Resources.StockNameSymbols.Split('\n');
+            StocksComboBox.DataSource = StockNames;
             //webClient.DownloadFile(, );
             //Console.Write(output);
-            StockName = "AAPL";
+            //StockNames[0] = "AAPL";
             //--streamReader
             //string url = https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=1605639981&period2=1637175981&interval=1d&events=history&includeAdjustedClose=true
         }
@@ -50,7 +55,7 @@ namespace StockMarketProject
         {
 
             df = new StockDataForm();
-            df.Text = StockName + " Data";
+            //df.Text = StockNames[0] + " Data";
             df.Show();
         }
     }

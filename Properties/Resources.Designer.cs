@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestForProject3.Properties {
+namespace StockMarket.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TestForProject3.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TestForProject3.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StockMarket.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -82,6 +82,135 @@ namespace TestForProject3.Properties {
         internal static string StockNames {
             get {
                 return ResourceManager.GetString("StockNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABT
+        ///ABBV
+        ///ABMD
+        ///ACN
+        ///ATVI
+        ///ADBE
+        ///AMD
+        ///AAP
+        ///AES
+        ///AFL
+        ///A
+        ///APD
+        ///AKAM
+        ///ALK
+        ///ALB
+        ///ARE
+        ///ALGN
+        ///ALLE
+        ///ALL
+        ///AMZN
+        ///AMCR
+        ///AEE
+        ///AAL
+        ///AEP
+        ///AXP
+        ///AIG
+        ///AMT
+        ///AWK
+        ///AMP
+        ///ABC
+        ///AME
+        ///AMGN
+        ///APH
+        ///ADI
+        ///ANSS
+        ///ANTM
+        ///AON
+        ///AOS
+        ///APA
+        ///AAPL
+        ///AMAT
+        ///APTV
+        ///ADM
+        ///ANET
+        ///AJG
+        ///AIZ
+        ///ATO
+        ///ADSK
+        ///ADP
+        ///AZO
+        ///AVB
+        ///AVY
+        ///AVGO
+        ///BKR
+        ///BLL
+        ///BAC
+        ///BBWI
+        ///BAX
+        ///BDX
+        ///BRK.B
+        ///BBY
+        ///BIO
+        ///BIIB
+        ///BLK
+        ///BK
+        ///BA
+        ///BKNG
+        ///BWA
+        ///BXP
+        ///BSX
+        ///BMY
+        ///BR
+        ///BRO
+        ///BF.B
+        ///BEN
+        ///CHRW
+        ///CDNS
+        ///CZR
+        ///CPB
+        ///COF
+        ///CAH
+        ///CCL
+        ///CARR
+        ///CTLT
+        ///CAT
+        ///CBOE
+        ///CBRE
+        ///CDW
+        ///CE
+        ///CNC
+        ///CNP
+        ///CDAY
+        ///CERN
+        ///CF
+        ///CRL
+        ///CHTR
+        ///CVX
+        ///CMG
+        ///CB
+        ///CHD
+        ///CI
+        ///CINF
+        ///CTAS
+        ///CSCO
+        ///C
+        ///CFG
+        ///CTXS
+        ///CLX
+        ///CME
+        ///CMS
+        ///CTSH
+        ///CL
+        ///CMCSA
+        ///CMA
+        ///CAG
+        ///COP
+        ///COO
+        ///CPRT
+        ///CTVA
+        ///COST
+        ///C [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string StockNameSymbols {
+            get {
+                return ResourceManager.GetString("StockNameSymbols", resourceCulture);
             }
         }
     }
