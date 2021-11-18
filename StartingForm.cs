@@ -28,6 +28,17 @@ namespace StockMarketProject
 
             string output = webClient.DownloadString(url);
             string[] DataRows = output.Split('\n');
+            foreach(string line in DataRows)
+            {
+                string[] dataPoints = line.Split(',');
+                //dataPoints[0]; //Date
+                //dataPoints[1]; //Open
+                //dataPoints[2]; //High
+                //dataPoints[3]; //Low
+                //dataPoints[4]; //Close
+                //dataPoints[5]; //Adj. Close
+                //dataPoints[6]; //Volume
+            }
             //webClient.DownloadFile(, );
             //Console.Write(output);
             StockName = "AAPL";
