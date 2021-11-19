@@ -54,14 +54,23 @@ namespace StockMarketProject
         private void LoadDataButton_Click(object sender, EventArgs e)
         {
             ///Validate that input field as put in
-            DateTimeOffset dto = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
-            string StartTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();
-            string EndTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();
+            DateTime start = StartDatePicker.Value;
+            DateTime end = EndDatePicker.Value;
+
+            string StartTimeSinceEpoch = new DateTimeOffset(start.Year, start.Month, start.Day, start.Hour, start.Minute, start.Second, TimeSpan.Zero).ToUnixTimeMilliseconds().ToString();
+            string EndTimeSinceEpoch = new DateTimeOffset(end.Year, end.Month, end.Day, end.Hour, end.Minute, end.Second, TimeSpan.Zero).ToUnixTimeMilliseconds().ToString();
+            /*string StartTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();
+            string EndTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();*/
             string text = StocksComboBox.Text;
-            string Interval = PeriodComboBox.Text == "daily" ? "daily" : PeriodComboBox.Text == "weekly" ? "weekly" : PeriodComboBox.Text == "monthly" ? "monthly" : "";
+            string Interval = PeriodComboBox.Text == "Daily" ? "1d" : PeriodComboBox.Text == "Weekly" ? "1wk" : PeriodComboBox.Text == "Monthly" ? "1mo" : "";
             df = new StockDataForm(text, StartTimeSinceEpoch, EndTimeSinceEpoch, Interval);
             df.Text = text + " Data";
             df.Show();
         }
+
+        /*private bool ValidateData()
+        {
+            if()
+        }*/
     }
 }
