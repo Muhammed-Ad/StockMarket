@@ -25,7 +25,7 @@ namespace StockMarketProject
             //includeAdjustedClose just includes extra data about closing
             //Also may need to read in csv of S&P 500 companies
             //WebBrowser object may be useful
-            string url = "https://query1.finance.yahoo.com/v7/finance/download/AAP?period1=1605639981&period2=1637175981&interval=1d&events=history&includeAdjustedClose=true";
+            /*string url = "https://query1.finance.yahoo.com/v7/finance/download/AAP?period1=1605639981&period2=1637175981&interval=1d&events=history&includeAdjustedClose=true";
 
             string output = webClient.DownloadString(url);
             string[] DataRows = output.Split('\n');
@@ -39,7 +39,7 @@ namespace StockMarketProject
                 //dataPoints[4]; //Close
                 //dataPoints[5]; //Adj. Close
                 //dataPoints[6]; //Volume
-            }
+            }*/
             //StockMarketProject.Properties.Resources.StockNames;
 
             StockNames = Resources.StockNameSymbols.Split('\n');
@@ -57,8 +57,8 @@ namespace StockMarketProject
             DateTime start = StartDatePicker.Value;
             DateTime end = EndDatePicker.Value;
 
-            string StartTimeSinceEpoch = new DateTimeOffset(start.Year, start.Month, start.Day, start.Hour, start.Minute, start.Second, TimeSpan.Zero).ToUnixTimeMilliseconds().ToString();
-            string EndTimeSinceEpoch = new DateTimeOffset(end.Year, end.Month, end.Day, end.Hour, end.Minute, end.Second, TimeSpan.Zero).ToUnixTimeMilliseconds().ToString();
+            string StartTimeSinceEpoch = new DateTimeOffset(start.Year, start.Month, start.Day, start.Hour, start.Minute, start.Second, TimeSpan.Zero).ToUnixTimeSeconds().ToString();
+            string EndTimeSinceEpoch = new DateTimeOffset(end.Year, end.Month, end.Day, end.Hour, end.Minute, end.Second, TimeSpan.Zero).ToUnixTimeSeconds().ToString();
             /*string StartTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();
             string EndTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();*/
             string text = StocksComboBox.Text;
