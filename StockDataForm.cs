@@ -26,11 +26,19 @@ namespace StockMarketProject
             System.Net.WebClient webClient = new System.Net.WebClient();
             
             string output = webClient.DownloadString(URL);
-            
+            InitializeComponent();
+
             string[] DataRows = output.Split('\n');
+            double min = double.MaxValue;
+            DataChart.Series[0].Name = stockName;
             foreach (string line in DataRows)
             {
                 string[] dataPoints = line.Split(',');
+                if (dataPoints[0] == "Date") continue;
+                
+                DataChart.Series[0].Points.AddXY(dataPoints[0], dataPoints[2], dataPoints[3], dataPoints[1], dataPoints[4]);
+                min = double.Parse(dataPoints[3]) < min ? double.Parse(dataPoints[3]) : min;
+                DataChart.ChartAreas[0].AxisY.Minimum = min - min/20.0;
                 //dataPoints[0]; //Date
                 //dataPoints[1]; //Open
                 //dataPoints[2]; //High
@@ -39,8 +47,8 @@ namespace StockMarketProject
                 //dataPoints[5]; //Adj. Close
                 //dataPoints[6]; //Volume
             }
-            Console.Write(output);
-            InitializeComponent();
+            //Console.Write(output);
+            
         }
     }
 }

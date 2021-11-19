@@ -62,6 +62,12 @@ namespace StockMarketProject
             /*string StartTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();
             string EndTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();*/
             string text = StocksComboBox.Text;
+            if (!StockNames.Contains<string>(text.ToUpper()))
+            {
+                MessageBox.Show("Stock does not exist", "Error!");
+                return;
+            }
+                
             string Interval = PeriodComboBox.Text == "Daily" ? "1d" : PeriodComboBox.Text == "Weekly" ? "1wk" : PeriodComboBox.Text == "Monthly" ? "1mo" : "";
             df = new StockDataForm(text, StartTimeSinceEpoch, EndTimeSinceEpoch, Interval);
             df.Text = text + " Data";
