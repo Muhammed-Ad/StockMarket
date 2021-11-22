@@ -18,7 +18,7 @@ namespace StockMarketProject
         public StartingForm()
         {
             InitializeComponent();
-            System.Net.WebClient webClient = new System.Net.WebClient();
+            //System.Net.WebClient webClient = new System.Net.WebClient();
             //get the unix time for the period variables in the URL
             //interval gives you the frequency in which the opening and closing prices are updated
             //events is the what type of csv you want, in the case, we want a historical type
@@ -42,8 +42,8 @@ namespace StockMarketProject
             }*/
             //StockMarketProject.Properties.Resources.StockNames;
 
-            StockNames = Resources.StockNameSymbols.Split('\n');
-            StocksComboBox.DataSource = StockNames;
+            //StockNames = Resources.StockNameSymbols.Split('\n');
+            StocksComboBox.DataSource = Resources.StockNameSymbols.Split('\n');// StockNames;
             //webClient.DownloadFile(, );
             //Console.Write(output);
             //StockNames[0] = "AAPL";
@@ -81,10 +81,5 @@ namespace StockMarketProject
             df.Text = text + " Data";
             df.Show();
         }
-
-        /*private bool ValidateData()
-        {
-            if()
-        }*/
     }
 }
