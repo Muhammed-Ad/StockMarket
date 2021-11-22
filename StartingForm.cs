@@ -56,11 +56,22 @@ namespace StockMarketProject
             ///Validate that input field as put in
             DateTime start = StartDatePicker.Value;
             DateTime end = EndDatePicker.Value;
-
-            string StartTimeSinceEpoch = new DateTimeOffset(start.Year, start.Month, start.Day, start.Hour, start.Minute, start.Second, TimeSpan.Zero).ToUnixTimeSeconds().ToString();
-            string EndTimeSinceEpoch = new DateTimeOffset(end.Year, end.Month, end.Day, end.Hour, end.Minute, end.Second, TimeSpan.Zero).ToUnixTimeSeconds().ToString();
+            long startTime = new DateTimeOffset(start.Year, start.Month, start.Day, start.Hour, start.Minute, start.Second, TimeSpan.Zero).ToUnixTimeSeconds();
+            long endTime = new DateTimeOffset(end.Year, end.Month, end.Day, end.Hour, end.Minute, end.Second, TimeSpan.Zero).ToUnixTimeSeconds();
+            if(endTime > startTime)
+            {
+                MessageBox.Show("Cannot have end be more recent than start", "Error!");
+                return;
+            }
+            string StartTimeSinceEpoch = startTime.ToString();
+            string EndTimeSinceEpoch = endTime.ToString();
             /*string StartTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();
             string EndTimeSinceEpoch = dto.ToUnixTimeMilliseconds().ToString();*/
+            if(StartTimeSinceEpoch == EndTimeSinceEpoch)
+            {
+                MessageBox.Show("Cannot input same value for start and end", "Error!");
+                return;
+            }
             string text = StocksComboBox.Text;
             if (!StockNames.Contains<string>(text.ToUpper()))
             {
