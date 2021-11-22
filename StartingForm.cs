@@ -72,7 +72,7 @@ namespace StockMarketProject
             string text = StocksComboBox.Text;
             if (!StockNames.Contains<string>(text.ToUpper()))
             {
-                MessageBox.Show("Stock does not exist", "Error!");
+                MessageBox.Show("Stock does not exist in S&P 500", "Error!");
                 return;
             }
                 
