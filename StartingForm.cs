@@ -42,8 +42,8 @@ namespace StockMarketProject
             }*/
             //StockMarketProject.Properties.Resources.StockNames;
 
-            //StockNames = Resources.StockNameSymbols.Split('\n');
-            StocksComboBox.DataSource = Resources.StockNameSymbols.Split('\n');// StockNames;
+            StockNames = Resources.StockNameSymbols.Split('\n');
+            StocksComboBox.DataSource = StockNames;
             //webClient.DownloadFile(, );
             //Console.Write(output);
             //StockNames[0] = "AAPL";
@@ -63,7 +63,7 @@ namespace StockMarketProject
                 MessageBox.Show("Cannot input same value for start and end", "Error!");
                 return;
             }
-            if(endTime > startTime)
+            if(startTime > endTime)
             {
                 MessageBox.Show("Cannot have end be more recent than start", "Error!");
                 return;
