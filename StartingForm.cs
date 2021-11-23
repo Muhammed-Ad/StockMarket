@@ -75,7 +75,10 @@ namespace StockMarketProject
                 MessageBox.Show("Stock does not exist in S&P 500", "Error!");
                 return;
             }
-                
+            if(text[text.Length - 1] == '\r')
+            {
+                text = text.Remove(text.Length - 1, 1); 
+            }
             string Interval = PeriodComboBox.Text == "Daily" ? "1d" : PeriodComboBox.Text == "Weekly" ? "1wk" : PeriodComboBox.Text == "Monthly" ? "1mo" : "";
             df = new StockDataForm(text, startTime.ToString(), endTime.ToString(), Interval);
             df.Text = text + " Data";
