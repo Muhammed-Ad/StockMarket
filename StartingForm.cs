@@ -77,10 +77,10 @@ namespace StockMarketProject
                 return;
             }
 
-            if (text[text.Length - 1] != '\r')
+            /*if (text[text.Length - 1] != '\r')
             {
-                text = text + "\r";
-            }
+                //text = text + "\r";
+            }*/
 
             Console.WriteLine(text);
                         
@@ -97,10 +97,15 @@ namespace StockMarketProject
                 return;
             }
 
-            text = text.Remove(text.Length - 1, 1); 
+            if (text[text.Length - 1] == '\r')
+            {
+                text = text = text.Remove(text.Length - 1, 1);
+                //text = text + "\r";
+            }
+             
             
 
-            string Interval = PeriodComboBox.Text == "Daily" ? "1d" : PeriodComboBox.Text == "Weekly" ? "1wk" : PeriodComboBox.Text == "Monthly" ? "1mo" : "";
+            string Interval = PeriodComboBox.Text == "Daily" ? "1d" : PeriodComboBox.Text == "Weekly" ? "1wk" : PeriodComboBox.Text == "Monthly" ? "1mo" : "1d";
             df = new StockDataForm(text, startTime.ToString(), endTime.ToString(), Interval);
             df.Text = text + " Data";
             df.Show();
