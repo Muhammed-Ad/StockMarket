@@ -70,19 +70,42 @@ namespace StockMarketProject
             }
             
             string text = StocksComboBox.Text;
+            //check the Stock box is empty
+            if(text == "")
+            {
+                MessageBox.Show("The Ticket Cannot be EMPTY!", "Error");
+                return;
+            }
+
+            if (text[text.Length - 1] != '\r')
+            {
+                text = text + "\r";
+            }
+
+            Console.WriteLine(text);
+                        
+            //check the typed string is in Collection
             if (!StockNames.Contains<string>(text.ToUpper()))
             {
                 MessageBox.Show("Stock does not exist in S&P 500", "Error!");
                 return;
             }
-            if(text[text.Length - 1] == '\r')
+            //check the peridod box is empty
+            if(PeriodComboBox.Text == "")
             {
-                text = text.Remove(text.Length - 1, 1); 
+                MessageBox.Show("Period Cannot Be EMPTY", "Error!");
+                return;
             }
+
+            text = text.Remove(text.Length - 1, 1); 
+            
+
             string Interval = PeriodComboBox.Text == "Daily" ? "1d" : PeriodComboBox.Text == "Weekly" ? "1wk" : PeriodComboBox.Text == "Monthly" ? "1mo" : "";
             df = new StockDataForm(text, startTime.ToString(), endTime.ToString(), Interval);
             df.Text = text + " Data";
             df.Show();
         }
+
+        
     }
 }

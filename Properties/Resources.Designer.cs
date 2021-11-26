@@ -61,6 +61,26 @@ namespace StockMarket.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stock_background {
+            get {
+                object obj = ResourceManager.GetObject("stock_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stock_background2 {
+            get {
+                object obj = ResourceManager.GetObject("stock_background2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Symbol,Name,Sector
         ///MMM,3M,Industrials
         ///AOS,A. O. Smith,Industrials
@@ -76,8 +96,7 @@ namespace StockMarket.Properties {
         ///AES,AES Corp,Utilities
         ///AFL,Aflac,Financials
         ///A,Agilent Technologies,Health Care
-        ///APD,Air Products &amp; Chemicals,Materials
-        ///AKA [rest of string was truncated]&quot;;.
+        ///APD,Air Products &amp; Chemical [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StockNames {
             get {
@@ -183,29 +202,6 @@ namespace StockMarket.Properties {
         ///CRL
         ///CHTR
         ///CVX
-        ///CMG
-        ///CB
-        ///CHD
-        ///CI
-        ///CINF
-        ///CTAS
-        ///CSCO
-        ///C
-        ///CFG
-        ///CTXS
-        ///CLX
-        ///CME
-        ///CMS
-        ///CTSH
-        ///CL
-        ///CMCSA
-        ///CMA
-        ///CAG
-        ///COP
-        ///COO
-        ///CPRT
-        ///CTVA
-        ///COST
         ///C [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StockNameSymbols {
