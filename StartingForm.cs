@@ -42,7 +42,7 @@ namespace StockMarketProject
             }*/
             //StockMarketProject.Properties.Resources.StockNames;
 
-            StockNames = Resources.StockNameSymbols.Split('\n');
+            StockNames = Resources.StockNameSymbols.Split('\n', '\r');
             StocksComboBox.DataSource = StockNames;
             //webClient.DownloadFile(, );
             //Console.Write(output);

@@ -46,19 +46,22 @@ namespace StockMarketProject
             this.TickerLabel.BackColor = System.Drawing.Color.Transparent;
             this.TickerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TickerLabel.ForeColor = System.Drawing.Color.White;
-            this.TickerLabel.Location = new System.Drawing.Point(50, 59);
+            this.TickerLabel.Location = new System.Drawing.Point(67, 73);
+            this.TickerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TickerLabel.Name = "TickerLabel";
-            this.TickerLabel.Size = new System.Drawing.Size(67, 20);
+            this.TickerLabel.Size = new System.Drawing.Size(85, 25);
             this.TickerLabel.TabIndex = 0;
             this.TickerLabel.Text = "Ticker: ";
             // 
             // StocksComboBox
             // 
+            this.StocksComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StocksComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StocksComboBox.FormattingEnabled = true;
-            this.StocksComboBox.Location = new System.Drawing.Point(181, 56);
+            this.StocksComboBox.Location = new System.Drawing.Point(241, 69);
+            this.StocksComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.StocksComboBox.Name = "StocksComboBox";
-            this.StocksComboBox.Size = new System.Drawing.Size(122, 28);
+            this.StocksComboBox.Size = new System.Drawing.Size(161, 33);
             this.StocksComboBox.TabIndex = 1;
             // 
             // StartDateLabel
@@ -67,9 +70,10 @@ namespace StockMarketProject
             this.StartDateLabel.BackColor = System.Drawing.Color.Transparent;
             this.StartDateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartDateLabel.ForeColor = System.Drawing.Color.White;
-            this.StartDateLabel.Location = new System.Drawing.Point(50, 134);
+            this.StartDateLabel.Location = new System.Drawing.Point(67, 165);
+            this.StartDateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.StartDateLabel.Name = "StartDateLabel";
-            this.StartDateLabel.Size = new System.Drawing.Size(59, 20);
+            this.StartDateLabel.Size = new System.Drawing.Size(71, 25);
             this.StartDateLabel.TabIndex = 2;
             this.StartDateLabel.Text = "Start: ";
             // 
@@ -79,9 +83,10 @@ namespace StockMarketProject
             this.EndDateLabel.BackColor = System.Drawing.Color.Transparent;
             this.EndDateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EndDateLabel.ForeColor = System.Drawing.Color.White;
-            this.EndDateLabel.Location = new System.Drawing.Point(50, 203);
+            this.EndDateLabel.Location = new System.Drawing.Point(67, 250);
+            this.EndDateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.EndDateLabel.Name = "EndDateLabel";
-            this.EndDateLabel.Size = new System.Drawing.Size(51, 20);
+            this.EndDateLabel.Size = new System.Drawing.Size(63, 25);
             this.EndDateLabel.TabIndex = 3;
             this.EndDateLabel.Text = "End: ";
             // 
@@ -91,9 +96,10 @@ namespace StockMarketProject
             this.PeriodComboBoxLabel.BackColor = System.Drawing.Color.Transparent;
             this.PeriodComboBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PeriodComboBoxLabel.ForeColor = System.Drawing.Color.White;
-            this.PeriodComboBoxLabel.Location = new System.Drawing.Point(50, 276);
+            this.PeriodComboBoxLabel.Location = new System.Drawing.Point(67, 340);
+            this.PeriodComboBoxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PeriodComboBoxLabel.Name = "PeriodComboBoxLabel";
-            this.PeriodComboBoxLabel.Size = new System.Drawing.Size(75, 20);
+            this.PeriodComboBoxLabel.Size = new System.Drawing.Size(93, 25);
             this.PeriodComboBoxLabel.TabIndex = 4;
             this.PeriodComboBoxLabel.Text = "Period:  ";
             // 
@@ -106,17 +112,19 @@ namespace StockMarketProject
             "Daily",
             "Monthly",
             "Weekly"});
-            this.PeriodComboBox.Location = new System.Drawing.Point(181, 268);
+            this.PeriodComboBox.Location = new System.Drawing.Point(241, 337);
+            this.PeriodComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PeriodComboBox.Name = "PeriodComboBox";
-            this.PeriodComboBox.Size = new System.Drawing.Size(112, 28);
+            this.PeriodComboBox.Size = new System.Drawing.Size(148, 33);
             this.PeriodComboBox.TabIndex = 5;
             // 
             // LoadDataButton
             // 
             this.LoadDataButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoadDataButton.Location = new System.Drawing.Point(143, 364);
+            this.LoadDataButton.Location = new System.Drawing.Point(191, 448);
+            this.LoadDataButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.LoadDataButton.Name = "LoadDataButton";
-            this.LoadDataButton.Size = new System.Drawing.Size(112, 44);
+            this.LoadDataButton.Size = new System.Drawing.Size(149, 54);
             this.LoadDataButton.TabIndex = 6;
             this.LoadDataButton.Text = "Load Data";
             this.LoadDataButton.UseVisualStyleBackColor = true;
@@ -125,30 +133,32 @@ namespace StockMarketProject
             // StartDatePicker
             // 
             this.StartDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartDatePicker.Location = new System.Drawing.Point(181, 134);
+            this.StartDatePicker.Location = new System.Drawing.Point(241, 165);
+            this.StartDatePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.StartDatePicker.MaxDate = new System.DateTime(2021, 11, 24, 0, 0, 0, 0);
             this.StartDatePicker.Name = "StartDatePicker";
-            this.StartDatePicker.Size = new System.Drawing.Size(237, 22);
+            this.StartDatePicker.Size = new System.Drawing.Size(315, 26);
             this.StartDatePicker.TabIndex = 9;
             this.StartDatePicker.Value = new System.DateTime(2021, 11, 18, 0, 0, 0, 0);
             // 
             // EndDatePicker
             // 
             this.EndDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EndDatePicker.Location = new System.Drawing.Point(181, 203);
+            this.EndDatePicker.Location = new System.Drawing.Point(241, 250);
+            this.EndDatePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.EndDatePicker.MaxDate = new System.DateTime(2021, 11, 25, 0, 0, 0, 0);
             this.EndDatePicker.Name = "EndDatePicker";
-            this.EndDatePicker.Size = new System.Drawing.Size(237, 22);
+            this.EndDatePicker.Size = new System.Drawing.Size(315, 26);
             this.EndDatePicker.TabIndex = 10;
             this.EndDatePicker.Value = new System.DateTime(2021, 11, 25, 0, 0, 0, 0);
             // 
             // StartingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::StockMarket.Properties.Resources.stock_background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(442, 453);
+            this.ClientSize = new System.Drawing.Size(589, 558);
             this.Controls.Add(this.EndDatePicker);
             this.Controls.Add(this.StartDatePicker);
             this.Controls.Add(this.LoadDataButton);
@@ -159,6 +169,7 @@ namespace StockMarketProject
             this.Controls.Add(this.StocksComboBox);
             this.Controls.Add(this.TickerLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "StartingForm";
             this.Text = "Stock Market";
             this.ResumeLayout(false);
