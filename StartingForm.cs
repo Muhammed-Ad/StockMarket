@@ -19,7 +19,7 @@ namespace StockMarketProject
         {
             InitializeComponent();
             EndDatePicker.Value = DateTime.Now;
-            
+
             //System.Net.WebClient webClient = new System.Net.WebClient();
             //get the unix time for the period variables in the URL
             //interval gives you the frequency in which the opening and closing prices are updated
@@ -44,8 +44,14 @@ namespace StockMarketProject
             }*/
             //StockMarketProject.Properties.Resources.StockNames;
 
-            StockNames = Resources.StockNameSymbols.Split('\n', '\r');
-            
+            //StockNames = Resources.StockNameSymbols.Split('\n', '\r');
+            int i = 0;
+            //StockNames = Resources.StockNames.Split('\n', '\r');
+            StockNames = Resources.StockNames.Split('\n');
+            StockNames = StockNames.Select(row => {
+                    var temp = row.Split(',');
+                    return temp[0] + " ( " + temp[1] + " )";
+            }).ToArray();
             StocksComboBox.DataSource = StockNames;
             
             //webClient.DownloadFile(, );
