@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace StockMarketProject
 {
     public partial class StockDataForm : Form

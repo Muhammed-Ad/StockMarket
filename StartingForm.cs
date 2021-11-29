@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using StockMarket.Properties;
@@ -18,6 +18,8 @@ namespace StockMarketProject
         public StartingForm()
         {
             InitializeComponent();
+            EndDatePicker.Value = DateTime.Now;
+            
             //System.Net.WebClient webClient = new System.Net.WebClient();
             //get the unix time for the period variables in the URL
             //interval gives you the frequency in which the opening and closing prices are updated
@@ -43,7 +45,9 @@ namespace StockMarketProject
             //StockMarketProject.Properties.Resources.StockNames;
 
             StockNames = Resources.StockNameSymbols.Split('\n', '\r');
+            
             StocksComboBox.DataSource = StockNames;
+            
             //webClient.DownloadFile(, );
             //Console.Write(output);
             //StockNames[0] = "AAPL";
@@ -111,6 +115,6 @@ namespace StockMarketProject
             df.Show();
         }
 
-        
+       
     }
 }

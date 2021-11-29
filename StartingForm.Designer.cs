@@ -126,7 +126,7 @@ namespace StockMarketProject
             // 
             this.StartDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartDatePicker.Location = new System.Drawing.Point(181, 134);
-            this.StartDatePicker.MaxDate = new System.DateTime(2021, 11, 24, 0, 0, 0, 0);
+            this.StartDatePicker.MaxDate = new System.DateTime(2109, 12, 31, 0, 0, 0, 0);
             this.StartDatePicker.Name = "StartDatePicker";
             this.StartDatePicker.Size = new System.Drawing.Size(237, 22);
             this.StartDatePicker.TabIndex = 9;
@@ -136,11 +136,12 @@ namespace StockMarketProject
             // 
             this.EndDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EndDatePicker.Location = new System.Drawing.Point(181, 203);
-            this.EndDatePicker.MaxDate = new System.DateTime(2021, 11, 25, 0, 0, 0, 0);
+            this.EndDatePicker.MaxDate = new System.DateTime(2109, 12, 31, 0, 0, 0, 0);
             this.EndDatePicker.Name = "EndDatePicker";
             this.EndDatePicker.Size = new System.Drawing.Size(237, 22);
             this.EndDatePicker.TabIndex = 10;
-            this.EndDatePicker.Value = new System.DateTime(2021, 11, 25, 0, 0, 0, 0);
+            this.EndDatePicker.Value = new System.DateTime(2021,11,28,0,0,0,0);
+            
             // 
             // StartingForm
             // 
