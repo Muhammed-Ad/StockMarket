@@ -19,7 +19,9 @@ namespace StockMarketProject
         {
             InitializeComponent();
             EndDatePicker.Value = DateTime.Now;
-
+            EndDatePicker.MaxDate = DateTime.Now;
+            StartDatePicker.Value = DateTime.Now;
+            StartDatePicker.MaxDate = DateTime.Now;
             //System.Net.WebClient webClient = new System.Net.WebClient();
             //get the unix time for the period variables in the URL
             //interval gives you the frequency in which the opening and closing prices are updated
@@ -42,7 +44,7 @@ namespace StockMarketProject
                 //dataPoints[5]; //Adj. Close
                 //dataPoints[6]; //Volume
             }*/
-           
+
             int i = 0;
             
             StockNames = Resources.StockNames.Split('\n');
