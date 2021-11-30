@@ -50,7 +50,7 @@ namespace StockMarketProject
             StockNames = Resources.StockNames.Split('\n');
             StockNames = StockNames.Select(row => {
                     var temp = row.Split(',');
-                    return temp[0] + "  (" + temp[1] + ")";
+                    return temp[0] + " ( " + temp[1] + " )";
             }).ToArray();
             StocksComboBox.DataSource = StockNames;
             
@@ -116,7 +116,7 @@ namespace StockMarketProject
             
 
             string Interval = PeriodComboBox.Text == "Daily" ? "1d" : PeriodComboBox.Text == "Weekly" ? "1wk" : PeriodComboBox.Text == "Monthly" ? "1mo" : "1d";
-            df = new StockDataForm(text.Split(' ')[0], startTime.ToString(), endTime.ToString(), Interval);
+            df = new StockDataForm(text, startTime.ToString(), endTime.ToString(), Interval);
             df.Text = text + " Data";
             df.Show();
         }
