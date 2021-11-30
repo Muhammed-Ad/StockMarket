@@ -42,13 +42,15 @@ namespace StockMarketProject
                 //dataPoints[5]; //Adj. Close
                 //dataPoints[6]; //Volume
             }*/
-           
+            //StockMarketProject.Properties.Resources.StockNames;
+
+            //StockNames = Resources.StockNameSymbols.Split('\n', '\r');
             int i = 0;
-            
+            //StockNames = Resources.StockNames.Split('\n', '\r');
             StockNames = Resources.StockNames.Split('\n');
             StockNames = StockNames.Select(row => {
                     var temp = row.Split(',');
-                    return temp[0].ToUpper() + " (" + temp[1].ToUpper() + ")";
+                    return temp[0] + " (" + temp[1] + ")";
             }).ToArray();
             StocksComboBox.DataSource = StockNames;
             
@@ -66,7 +68,6 @@ namespace StockMarketProject
             DateTime end = EndDatePicker.Value;
             long startTime = new DateTimeOffset(start.Year, start.Month, start.Day, start.Hour, start.Minute, start.Second, TimeSpan.Zero).ToUnixTimeSeconds();//since unix epoch
             long endTime = new DateTimeOffset(end.Year, end.Month, end.Day, end.Hour, end.Minute, end.Second, TimeSpan.Zero).ToUnixTimeSeconds();
-            
             if(startTime == endTime)
             {
                 MessageBox.Show("Cannot input same value for start and end", "Error!");
@@ -77,26 +78,25 @@ namespace StockMarketProject
                 MessageBox.Show("Cannot have end be more recent than start", "Error!");
                 return;
             }
-
-            var textString = StocksComboBox.Text.Split(' ');
-            string text = textString[0];
-            string text2 = StocksComboBox.Text ;
             
+            string text = StocksComboBox.Text;
             //check the Stock box is empty
-            if (text == "")
+            if(text == "")
             {
                 MessageBox.Show("The Ticket Cannot be EMPTY!", "Error");
                 return;
             }
 
-            
+            /*if (text[text.Length - 1] != '\r')
+            {
+                //text = text + "\r";
+            }*/
+
             Console.WriteLine(text);
                         
             //check the typed string is in Collection
-            if (!StockNames.Contains<string>(text2.ToUpper()))
+            if (!StockNames.Contains<string>(text))
             {
-                
-                
                 MessageBox.Show("Stock does not exist in S&P 500", "Error!");
                 return;
             }
@@ -109,14 +109,14 @@ namespace StockMarketProject
 
             if (text[text.Length - 1] == '\r')
             {
-                text = text = text.Remove(text.Length - 1, 1);
+                text = text.Remove(text.Length - 1, 1);
                 //text = text + "\r";
             }
              
             
 
             string Interval = PeriodComboBox.Text == "Daily" ? "1d" : PeriodComboBox.Text == "Weekly" ? "1wk" : PeriodComboBox.Text == "Monthly" ? "1mo" : "1d";
-            df = new StockDataForm(text, startTime.ToString(), endTime.ToString(), Interval);
+            df = new StockDataForm(text.Split(' ')[0], startTime.ToString(), endTime.ToString(), Interval);
             df.Text = text + " Data";
             df.Show();
         }
