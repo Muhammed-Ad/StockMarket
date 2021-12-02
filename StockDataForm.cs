@@ -52,18 +52,26 @@ namespace StockMarketProject
                 DataChart.ChartAreas[0].AxisY.Minimum = min - min/20.0;
 
                 string dataDescription = "";
-                if(Math.Abs(close - open) < tol * close)
+                if(Math.Abs(close - open) < (tol * (high - low)))
                 {
                     dataDescription += "doji ";
                 }
-                else if((close - high) < tol * high && (open - low) < tol * low)
+                else if(Math.Abs(close - high) < (tol * high) && Math.Abs(open - low) < (tol * low))
                 {
                     dataDescription += "marubozu ";
+                }
+                else if(Math.Abs(close - open) < ((tol + 0.19) * (high - low)))
+                { //haramis
+                    dataDescription += "harami ";
                 }
 
                 var long_legged = (dataDescription == "doji ") && ((open - (high + low)/2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low));
                 var dragonfly = (dataDescription == "doji ") && (open - high < tol * high) && (close - high < tol * high);
                 var gravestone = (dataDescription == "doji ") && (open - low < tol * low) && (close - low < tol * low);
+                var bullishMarubozu = (dataDescription == "marubozu ") && (close > open);
+                var bearishMarubozu = (dataDescription == "marubozu ") && (close <= open);
+                var bullishHarami = (dataDescription == "harami ") && (close > open);
+                var bearishHarami = (dataDescription == "harami ") && (close <= open);
 
                 if (long_legged)
                 {
@@ -77,12 +85,17 @@ namespace StockMarketProject
                 {
                     dataDescription += "gravestone ";
                 }
-                else
+
+                if (bullishMarubozu)
                 {
-                    dataDescription += "error ";
+                    dataDescription += "bullish ";
+                }
+                else if (bearishMarubozu)
+                {
+                    dataDescription += "bearish ";
                 }
 
-
+                dataType.Add(dataDescription);
                 //dataPoints[0]; //Date
                 //dataPoints[1]; //Open
                 //dataPoints[2]; //High
@@ -92,10 +105,21 @@ namespace StockMarketProject
                 //dataPoints[6]; //Volume
             }
             //Console.Write(output);
-            
+            Console.Write(output);
         }
 
         private void CandleStickPatternComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for(int i = 0; i < dataType.Count(); i++)
+            {
+                if(CandleStickPatternComboBox.Text.Contains("Doji") && dataType[i].Contains("doji"))
+                {
+                    calcRectangle(i);
+                }
+            }
+        }
+
+        private void calcRectangle(int index)
         {
             RectangleAnnotation rectangleAnnotation = new RectangleAnnotation();
 
@@ -103,7 +127,15 @@ namespace StockMarketProject
             rectangleAnnotation.AxisX = DataChart.ChartAreas[0].AxisX;
             rectangleAnnotation.AxisY = DataChart.ChartAreas[0].AxisY;
 
-            rectangleAnnotation.X = 0;
+            rectangleAnnotation.X = DataChart.Series[0].Points[index].XValue;
+            rectangleAnnotation.Y = DataChart.Series[0].Points[index].YValues[1];
+            rectangleAnnotation.Width = DataChart.Series[0].Points[index].BorderWidth;
+            rectangleAnnotation.Height = DataChart.Series[0].Points[index].YValues[0] - DataChart.Series[0].Points[index].YValues[1];
+
+            rectangleAnnotation.LineColor = DataChart.Series[0].Points[index].Color;
+            rectangleAnnotation.LineWidth = 2;
+            rectangleAnnotation.LineDashStyle = ChartDashStyle.Dash;
+            rectangleAnnotation.BackColor = Color.White;
             DataChart.Update();
         }
     }
