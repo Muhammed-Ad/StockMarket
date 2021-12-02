@@ -112,10 +112,11 @@ namespace StockMarketProject
         {
             for(int i = 0; i < dataType.Count(); i++)
             {
-                if(CandleStickPatternComboBox.Text.Contains("Doji") && dataType[i].Contains("doji"))
-                {
-                    calcRectangle(i);
-                }
+                /* if(CandleStickPatternComboBox.Text.Contains("Doji") && dataType[i].Contains("doji"))
+                 {
+                     calcRectangle(i);
+                 }*/
+                calcRectangle(i);
             }
         }
 
@@ -124,18 +125,20 @@ namespace StockMarketProject
             RectangleAnnotation rectangleAnnotation = new RectangleAnnotation();
 
             rectangleAnnotation.IsSizeAlwaysRelative = false;
-            rectangleAnnotation.AxisX = DataChart.ChartAreas[0].AxisX;
-            rectangleAnnotation.AxisY = DataChart.ChartAreas[0].AxisY;
+           /*rectangleAnnotation.AxisX = DataChart.ChartAreas[0].AxisX;
+            rectangleAnnotation.AxisY = DataChart.ChartAreas[0].AxisY;*/
 
-            rectangleAnnotation.X = DataChart.Series[0].Points[index].XValue;
-            rectangleAnnotation.Y = DataChart.Series[0].Points[index].YValues[1];
-            rectangleAnnotation.Width = DataChart.Series[0].Points[index].BorderWidth;
+            /*rectangleAnnotation.X = DataChart.Series[0].Points[index].XValue;
+            rectangleAnnotation.Y = DataChart.Series[0].Points[index].YValues[1];*/
+            rectangleAnnotation.SetAnchor(DataChart.Series[0].Points[index]);
+            rectangleAnnotation.Width = DataChart.Series[0].Points.Count / 50;//DataChart.Series[0].Points[index].BorderWidth;
             rectangleAnnotation.Height = DataChart.Series[0].Points[index].YValues[0] - DataChart.Series[0].Points[index].YValues[1];
 
-            rectangleAnnotation.LineColor = DataChart.Series[0].Points[index].Color;
+            rectangleAnnotation.LineColor = Color.Black;//DataChart.Series[0].Points[index].Color;
             rectangleAnnotation.LineWidth = 2;
             rectangleAnnotation.LineDashStyle = ChartDashStyle.Dash;
             rectangleAnnotation.BackColor = Color.White;
+            DataChart.Annotations.Add(rectangleAnnotation);
             DataChart.Update();
         }
     }
