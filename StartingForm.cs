@@ -69,11 +69,12 @@ namespace StockMarketProject
             long startTime = new DateTimeOffset(start.Year, start.Month, start.Day, start.Hour, start.Minute, start.Second, TimeSpan.Zero).ToUnixTimeSeconds();//since unix epoch
             long endTime = new DateTimeOffset(end.Year, end.Month, end.Day, end.Hour, end.Minute, end.Second, TimeSpan.Zero).ToUnixTimeSeconds();
             
+            /*
             if(startTime == endTime)
             {
                 MessageBox.Show("Cannot input same value for start and end", "Error!");
                 return;
-            }
+            }*/
             if(startTime > endTime)
             {
                 MessageBox.Show("Cannot have end be more recent than start", "Error!");
