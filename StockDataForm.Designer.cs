@@ -35,7 +35,7 @@ namespace StockMarketProject
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.DataChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.CandleStickPatternComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.DataChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,7 +89,8 @@ namespace StockMarketProject
             legend1.TitleBackColor = System.Drawing.Color.Transparent;
             legend1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DataChart.Legends.Add(legend1);
-            this.DataChart.Location = new System.Drawing.Point(0, 92);
+            this.DataChart.Location = new System.Drawing.Point(0, 113);
+            this.DataChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DataChart.Name = "DataChart";
             this.DataChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.DataChart.PaletteCustomColors = new System.Drawing.Color[] {
@@ -116,7 +117,7 @@ namespace StockMarketProject
             series1.YValuesPerPoint = 4;
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             this.DataChart.Series.Add(series1);
-            this.DataChart.Size = new System.Drawing.Size(859, 495);
+            this.DataChart.Size = new System.Drawing.Size(1145, 609);
             this.DataChart.TabIndex = 0;
             this.DataChart.Text = "Data Chart";
             title1.BackColor = System.Drawing.Color.Transparent;
@@ -130,38 +131,47 @@ namespace StockMarketProject
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 33);
+            this.label1.Location = new System.Drawing.Point(16, 41);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "CandleStick Pattern";
             // 
-            // comboBox1
+            // CandleStickPatternComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.CandleStickPatternComboBox.FormattingEnabled = true;
+            this.CandleStickPatternComboBox.Items.AddRange(new object[] {
             "Neutral",
-            "Long-legged DOJI",
-            "Gravestone DOJI",
-            "Dragonfly DOJI"});
-            this.comboBox1.Location = new System.Drawing.Point(204, 32);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 2;
+            "Long-legged Doji",
+            "Gravestone Doji",
+            "Dragonfly Doji",
+            "Bullish Marubozus",
+            "Bearish Marubozus",
+            "Bullish Harami",
+            "Bearish Harami"});
+            this.CandleStickPatternComboBox.Location = new System.Drawing.Point(272, 39);
+            this.CandleStickPatternComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CandleStickPatternComboBox.Name = "CandleStickPatternComboBox";
+            this.CandleStickPatternComboBox.Size = new System.Drawing.Size(160, 24);
+            this.CandleStickPatternComboBox.TabIndex = 2;
+            this.CandleStickPatternComboBox.Text = "Neutral";
+            this.CandleStickPatternComboBox.SelectedIndexChanged += new System.EventHandler(this.CandleStickPatternComboBox_SelectedIndexChanged);
             // 
             // StockDataForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = global::StockMarket.Properties.Resources.stock_background2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(857, 585);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(1143, 720);
+            this.Controls.Add(this.CandleStickPatternComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DataChart);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "StockDataForm";
             this.Text = "Stock Data";
@@ -175,6 +185,6 @@ namespace StockMarketProject
 
         private System.Windows.Forms.DataVisualization.Charting.Chart DataChart;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CandleStickPatternComboBox;
     }
 }
