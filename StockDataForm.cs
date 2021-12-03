@@ -37,11 +37,11 @@ namespace StockMarketProject
             InitializeComponent();
             int count = 0;
             string[] DataRows = output.Split('\n');
-            double min = double.MaxValue;
+            
             DataChart.Series[0].Name = stockName;
             foreach (string line in DataRows)
             {
-                double tol = 0.15;
+                double tol = 0.1;
 
                 string[] dataPoints = line.Split(',');
                 if (dataPoints[0] == "Date") continue;
