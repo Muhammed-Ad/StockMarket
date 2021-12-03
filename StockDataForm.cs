@@ -15,6 +15,7 @@ namespace StockMarketProject
     {
         Dictionary<string, List<int>> dataTypeHash = new Dictionary<string, List<int>>();
         List<string> dataType = new List<string>();
+        List<DataPoint> dataTypeObj = new List<DataPoint>();
         List<RectangleAnnotation> rectList = new List<RectangleAnnotation>();
         private double maximum = 0;
         private double minimum = -1;
@@ -40,7 +41,7 @@ namespace StockMarketProject
             DataChart.Series[0].Name = stockName;
             foreach (string line in DataRows)
             {
-                double tol = .05;
+                double tol = 0.15;
 
                 string[] dataPoints = line.Split(',');
                 if (dataPoints[0] == "Date") continue;
@@ -50,8 +51,11 @@ namespace StockMarketProject
                        open = double.Parse(dataPoints[1]),
                        close = double.Parse(dataPoints[4]);
                 DateTime date = DateTime.Parse(dataPoints[0]);
+                DataPoint temp = new DataPoint();
+                temp.SetValueXY(date.ToBinary(), high, low, open, close);
+                dataTypeObj.Add(temp);
                 //double dateDouble = double.Parse(date.ToString());
-                bool doji = false;
+                bool bullish = close > open;
 
                 DataChart.Series[0].Points.AddXY(date, high, low, open, close);
 
@@ -81,34 +85,39 @@ namespace StockMarketProject
                 DataChart.ChartAreas["ChartArea1"].AxisY.Minimum = (int)(minimum - 10);
 
                 string dataDescription = "";
-                if(Math.Abs(close - open) < (tol * (high - low)))
+
+                double range = high - low;
+                double midpoint = (high + low) / 2;
+                if(Math.Abs(close - open) < (tol * (range)))
                 {
                     dataDescription += "Doji";
                 }
-                else if(Math.Abs(close - high) < (tol * high) && Math.Abs(open - low) < (tol * low))
+                else if(Math.Abs(close - open) >= (1 - (2 * tol)) * range/*Math.Abs(high - low)*//*Math.Abs(close - high) < (tol * (high - low)) && Math.Abs(open - low) < (tol * (high - low))*/)
                 {
                     dataDescription += "Marubozu";
                 }
-                else if(Math.Abs(close - open) < ((tol + 0.19) * (high - low)))
+                else if(Math.Abs(close - open) >= (1 - (4 * tol)) * range /*Math.Abs(high - low)*/ /*Math.Abs(close - open) < ((tol + 0.19) * (high - low))*/)
                 { //haramis
                     dataDescription += "Harami";
                 }
+                double htol = 1 + tol;
+                double ltol = 1 - tol;
+                bool neutral = (dataDescription == "Doji") && (open < 1.1 * midpoint && open > 0.9 * midpoint) && (close < 1.1 * midpoint && close > 0.9 * midpoint);/*((open - (high + low) / 2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low))*/;
+                bool long_legged =  neutral && (range >= 20 * Math.Abs(open - close)); /*(dataDescription == "Doji") && ((open - (high + low)/2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low))*/
+                bool dragonfly = (dataDescription == "Doji") && (open < 1.01 * high && open > 0.8 * high) && (close < 1.01 * high && close > 0.8 * high)/*(open - high < tol * high) && (close - high < tol * high)*/;
+                bool gravestone = (dataDescription == "Doji") && (open < 1.2 * low && open > 0.99 * low) && (close < 1.2 * low && close > 0.99 * low);
+                bool bullishMarubozu = (dataDescription == "Marubozu") && (close > open);
+                bool bearishMarubozu = (dataDescription == "Marubozu") && (close <= open);
+                bool bullishHarami = (dataDescription == "Harami") && (close > open);
+                bool bearishHarami = (dataDescription == "Harami") && (close <= open);
 
-                var neutral = (dataDescription == "Doji") && ((open - (high + low) / 2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low));
-                var long_legged = (dataDescription == "Doji") && ((open - (high + low)/2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low)) && (Math.Abs(open- close) <= (high -low) / 10);
-                var dragonfly = (dataDescription == "Doji") && (open - high < tol * high) && (close - high < tol * high);
-                var gravestone = (dataDescription == "Doji") && (open - low < tol * low) && (close - low < tol * low);
-                var bullishMarubozu = (dataDescription == "Marubozu") && (close > open);
-                var bearishMarubozu = (dataDescription == "Marubozu") && (close <= open);
-                var bullishHarami = (dataDescription == "Harami") && (close > open);
-                var bearishHarami = (dataDescription == "Harami") && (close <= open);
-                if (neutral)
-                {
-                    dataDescription = dataDescription.Insert(0, "Neutral ");
-                }
                 if (long_legged)
                 {
                     dataDescription = dataDescription.Insert(0, "Long-Legged ");
+                }
+                else if (neutral)
+                {
+                    dataDescription = dataDescription.Insert(0, "Neutral ");
                 }
                 else if (dragonfly)
                 {
@@ -128,6 +137,16 @@ namespace StockMarketProject
                     dataDescription = dataDescription.Insert(0, "Bearish ");
                 }
 
+                if (bullishHarami)
+                {
+                    dataDescription = dataDescription.Insert(0, "Bullish ");
+                }
+                else if (bearishHarami)
+                {
+                    dataDescription = dataDescription.Insert(0, "Bearish ");
+                }
+
+                dataType.Add(dataDescription);
                 if (dataTypeHash.ContainsKey(dataDescription)){
                     dataTypeHash[dataDescription].Add(count);
                 }
@@ -136,7 +155,9 @@ namespace StockMarketProject
                     dataTypeHash.Add(dataDescription, new List<int>());
                     dataTypeHash[dataDescription].Add(count);
                 }
-                calcRectangle(count);
+
+                //if(!dataDescription.Contains("Harami"))
+                calcRectangle(count, bullish);
                 count++;
 
                 //Neutral Doji
@@ -163,28 +184,79 @@ namespace StockMarketProject
         {
             if (!string.IsNullOrEmpty(CandleStickPatternComboBox.Text))
             {
+                dataTypeHash.Count();
                 DataChart.Annotations.Clear();
                 string candleType = CandleStickPatternComboBox.Text;
                 int size = -1;
-                try
+
+                if (!candleType.Contains("Harami"))
                 {
-                    size = dataTypeHash[candleType].Count();
+                    try
+                    {
+                        size = dataTypeHash[candleType].Count();
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        MessageBox.Show("No Candlesticks of type " + candleType + " currently available ", "Notice!");
+                        return;
+                    }
+                    for (int i = 0; i < size; i++)
+                    {
+                        DataChart.Annotations.Add(rectList[dataTypeHash[candleType][i]]);
+                    }
                 }
-                catch (KeyNotFoundException)
+                else
                 {
-                    MessageBox.Show("No Candlesticks of type " + candleType + " currently available ", "Notice!");
-                    return;
-                }
-                for (int i = 0; i < size; i++)
-                {
-                    DataChart.Annotations.Add(rectList[dataTypeHash[candleType][i]]);
+                    bool bullish = candleType.Contains("Bullish");
+                    int size1 = -1;
+                    int numFound = 0;
+                    try
+                    {
+                        size1 = dataTypeHash[candleType].Count();
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        MessageBox.Show("No Candlesticks of type " + candleType + " currently available ", "Notice!");
+                        return;
+                    }
+                    
+                    for(int i = 0; i < size1; i++)
+                    {
+                        int index = dataTypeHash[candleType][i];
+                        double[] temp1 = dataTypeObj[index].YValues;
+                        double[] temp2;
+                        if(index + 1 < dataTypeObj.Count())
+                        {
+                            if(dataType[index + 1] != "")
+                            {
+                                continue;
+                            }
+                            temp2 = dataTypeObj[index + 1].YValues;
+                        }
+                        else
+                        {
+                            break;
+                        }
+
+                        bool isValid = temp1[0] > temp2[0] && temp1[1] < temp2[1];  //temp1 high is higher than temp2 and temp1 low is lower than temp 2
+                        bool temp2Bearish = temp2[2] > temp2[3]; //open > close
+
+                        if(bullish == temp2Bearish)
+                        {
+                            rectList[index].Width *= 2;
+                            DataChart.Annotations.Add(rectList[index]);
+                            //rectList[index].AnchorOffsetX = 
+                        }
+                    }
+
+                   
                 }
                 DataChart.Update();
             }
             
         }
 
-        private void calcRectangle(int index)
+        private void calcRectangle(int index, bool bullish = false, int heightAdj = 0, int widthAdj = 0, int anchorAdj = 0)
         {
             RectangleAnnotation rectangleAnnotation = new RectangleAnnotation();
 
@@ -199,7 +271,7 @@ namespace StockMarketProject
             rectangleAnnotation.Width = DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth;//DataChart.Series[0].Points.Count / 50;
             rectangleAnnotation.Height = DataChart.Series[0].Points[index].YValues[0] - DataChart.Series[0].Points[index].YValues[1];
 
-            rectangleAnnotation.LineColor = Color.Black;//DataChart.Series[0].Points[index].Color;
+            rectangleAnnotation.LineColor = Color.Black/*bullish ? Color.Green : Color.Red*/;//DataChart.Series[0].Points[index].Color;
             rectangleAnnotation.LineWidth = 1;
             rectangleAnnotation.LineDashStyle = ChartDashStyle.Solid;
             rectangleAnnotation.BackColor = Color.Transparent;
