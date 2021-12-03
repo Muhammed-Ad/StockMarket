@@ -88,11 +88,12 @@ namespace StockMarketProject
 
                 double range = high - low;
                 double midpoint = (high + low) / 2;
-                if(Math.Abs(close - open) < (tol * (range)))
+                
+                if(Math.Abs(close - open) <= (tol * (range)))
                 {
                     dataDescription += "Doji";
                 }
-                else if(Math.Abs(close - open) >= (1 - (2 * tol)) * range/*Math.Abs(high - low)*//*Math.Abs(close - high) < (tol * (high - low)) && Math.Abs(open - low) < (tol * (high - low))*/)
+                else if(Math.Abs(close - open) >= (1 - (4 * tol)) * range/*Math.Abs(high - low)*//*Math.Abs(close - high) < (tol * (high - low)) && Math.Abs(open - low) < (tol * (high - low))*/)
                 {
                     dataDescription += "Marubozu";
                 }
@@ -102,8 +103,11 @@ namespace StockMarketProject
                 }
                 double htol = 1 + tol;
                 double ltol = 1 - tol;
-                bool neutral = (dataDescription == "Doji") && (open < 1.1 * midpoint && open > 0.9 * midpoint) && (close < 1.1 * midpoint && close > 0.9 * midpoint);/*((open - (high + low) / 2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low))*/;
-                bool long_legged =  neutral && (range >= 20 * Math.Abs(open - close)); /*(dataDescription == "Doji") && ((open - (high + low)/2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low))*/
+                double highest = bullish ? close : open;
+                double lowest = !bullish ? close : open;
+                //0 - hi, 1 - low, 2 - open, 3 - close
+                bool neutral = (dataDescription == "Doji") && (open < 1.2 * midpoint && open > 0.8 * midpoint) && (close < 1.2 * midpoint && close > 0.8 * midpoint);/*((open - (high + low) / 2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low))*/;
+                bool long_legged =  neutral && (range >= 50 * Math.Abs(open - close)); /*(dataDescription == "Doji") && ((open - (high + low)/2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low))*/
                 bool dragonfly = (dataDescription == "Doji") && (open < 1.01 * high && open > 0.8 * high) && (close < 1.01 * high && close > 0.8 * high)/*(open - high < tol * high) && (close - high < tol * high)*/;
                 bool gravestone = (dataDescription == "Doji") && (open < 1.2 * low && open > 0.99 * low) && (close < 1.2 * low && close > 0.99 * low);
                 bool bullishMarubozu = (dataDescription == "Marubozu") && (close > open);
@@ -137,14 +141,14 @@ namespace StockMarketProject
                     dataDescription = dataDescription.Insert(0, "Bearish ");
                 }
 
-                if (bullishHarami)
+                /*if (bullishHarami)
                 {
                     dataDescription = dataDescription.Insert(0, "Bullish ");
                 }
                 else if (bearishHarami)
                 {
                     dataDescription = dataDescription.Insert(0, "Bearish ");
-                }
+                }*/
 
                 dataType.Add(dataDescription);
                 if (dataTypeHash.ContainsKey(dataDescription)){
