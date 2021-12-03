@@ -26,19 +26,20 @@ namespace StockMarketProject
 
         public StockDataForm(string stockName, string start, string end, string interval)
         {
+            
             //start and end time must be in unix epoch time
             string URL = "https://query1.finance.yahoo.com/v7/finance/download/" + stockName + "?period1=" + start + "&period2=" + end + "&interval=" + interval + "&events=history&includeAdjustedClose=true";
             System.Net.WebClient webClient = new System.Net.WebClient();
             
             string output = webClient.DownloadString(URL);
-            InitializeComponent();
-
+            InitializeComponent();            
+            
             string[] DataRows = output.Split('\n');
-            double min = double.MaxValue;
+            //double min = double.MaxValue;
             DataChart.Series[0].Name = stockName;
             foreach (string line in DataRows)
             {
-                double tol = .05;
+                
 
                 string[] dataPoints = line.Split(',');
                 if (dataPoints[0] == "Date") continue;
@@ -65,9 +66,10 @@ namespace StockMarketProject
                 }
                 //min = double.Parse(dataPoints[3]) < min ? double.Parse(dataPoints[3]) : min;
                 //DataChart.ChartAreas[0].AxisY.Minimum = min - min/20.0;
-                DataChart.ChartAreas["ChartArea1"].AxisY.Maximum = (int)(maximum + 10);
-                DataChart.ChartAreas["ChartArea1"].AxisY.Minimum = (int)(minimum - 10);
+                DataChart.ChartAreas[0].AxisY.Maximum = (int)(maximum + 10);
+                DataChart.ChartAreas[0].AxisY.Minimum = (int)(minimum - 10);
 
+                double tol = .05;
                 string dataDescription = "";
                 if(Math.Abs(close - open) < (tol * (high - low)))
                 {
@@ -127,20 +129,39 @@ namespace StockMarketProject
 
         private void CandleStickPatternComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             for(int i = 0; i < dataType.Count(); i++)
             {
-                /* if(CandleStickPatternComboBox.Text.Contains("Doji") && dataType[i].Contains("doji"))
+                
+                if(CandleStickPatternComboBox.Text.Contains("Doji") && dataType[i].Contains("doji"))
                  {
                      calcRectangle(i);
-                 }*/
+                 }
+                
                 calcRectangle(i);
             }
+
+            
+            //need to clear the rectangle
+            /*
+            for(int i = 0; i < DataChart.Series["Series1"].Points.Count; ++i)
+            {
+                int flag = 0;
+                if(CandleStickPatternComboBox.Text == "Neutral Doji")
+                {
+
+                }
+
+            }*/
         }
 
         private void calcRectangle(int index)
         {
             RectangleAnnotation rectangleAnnotation = new RectangleAnnotation();
+            var point = DataChart.Series[0].Points[index];
+            double yRange = DataChart.ChartAreas[0].AxisY.Maximum - DataChart.ChartAreas[0].AxisY.Minimum;
 
+            rectangleAnnotation.ToolTip = "rectangle annotation";
             rectangleAnnotation.IsSizeAlwaysRelative = false;
            /*rectangleAnnotation.AxisX = DataChart.ChartAreas[0].AxisX;
             rectangleAnnotation.AxisY = DataChart.ChartAreas[0].AxisY;*/
@@ -148,15 +169,26 @@ namespace StockMarketProject
             /*rectangleAnnotation.X = DataChart.Series[0].Points[index].XValue;
             rectangleAnnotation.Y = DataChart.Series[0].Points[index].YValues[1];*/
             rectangleAnnotation.SetAnchor(DataChart.Series[0].Points[index]);
-            rectangleAnnotation.Width = DataChart.Series[0].Points.Count / 50;//DataChart.Series[0].Points[index].BorderWidth;
-            rectangleAnnotation.Height = DataChart.Series[0].Points[index].YValues[0] - DataChart.Series[0].Points[index].YValues[1];
+            //rectangleAnnotation.Width = DataChart.Series[0].Points.Count / 50;//DataChart.Series[0].Points[index].BorderWidth;
+            //rectangleAnnotation.Height = DataChart.Series[0].Points[index].YValues[0] - DataChart.Series[0].Points[index].YValues[1];
+            rectangleAnnotation.Width = 50 / DataChart.Series[0].Points.Count;
+            rectangleAnnotation.Height = ((point.YValues[0] - point.YValues[1]) / yRange) * 85;
 
             rectangleAnnotation.LineColor = Color.Black;//DataChart.Series[0].Points[index].Color;
-            rectangleAnnotation.LineWidth = 2;
+            rectangleAnnotation.LineWidth = 1;
             rectangleAnnotation.LineDashStyle = ChartDashStyle.Dash;
             rectangleAnnotation.BackColor = Color.White;
+
+            rectangleAnnotation.AnchorOffsetY = -(rectangleAnnotation.Height);
+            rectangleAnnotation.SetAnchor(point);
+
             DataChart.Annotations.Add(rectangleAnnotation);
-            DataChart.Update();
+            //DataChart.Update();
+        }
+
+        private void StockDataForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

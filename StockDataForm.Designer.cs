@@ -42,9 +42,8 @@ namespace StockMarketProject
             // DataChart
             // 
             this.DataChart.BackColor = System.Drawing.Color.Transparent;
-            this.DataChart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DataChart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.DataChart.BackImageTransparentColor = System.Drawing.Color.Transparent;
-            this.DataChart.BackImageWrapMode = System.Windows.Forms.DataVisualization.Charting.ChartImageWrapMode.Scaled;
             this.DataChart.BackSecondaryColor = System.Drawing.Color.Transparent;
             this.DataChart.BorderlineColor = System.Drawing.Color.Transparent;
             chartArea1.AxisX.InterlacedColor = System.Drawing.Color.Transparent;
@@ -102,7 +101,7 @@ namespace StockMarketProject
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
             series1.Color = System.Drawing.Color.White;
-            series1.CustomProperties = "PriceDownColor=192\\, 0\\, 0, PointWidth=0.5, PriceUpColor=0\\, 192\\, 0";
+            series1.CustomProperties = "PriceDownColor=192\\, 0\\, 0, PointWidth=0.7, PriceUpColor=0\\, 192\\, 0";
             series1.EmptyPointStyle.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.LeftRight;
             series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             series1.LabelBorderWidth = 2;
@@ -137,11 +136,11 @@ namespace StockMarketProject
             // 
             // CandleStickPatternComboBox
             // 
-            this.CandleStickPatternComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CandleStickPatternComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CandleStickPatternComboBox.FormattingEnabled = true;
             this.CandleStickPatternComboBox.Items.AddRange(new object[] {
             "Neutral Doji",
-            "Long-legged Doji",
+            "Long - legged Doji",
             "Gravestone Doji",
             "Dragonfly Doji",
             "Bullish Marubozus",
@@ -150,15 +149,15 @@ namespace StockMarketProject
             "Bearish Harami"});
             this.CandleStickPatternComboBox.Location = new System.Drawing.Point(426, 19);
             this.CandleStickPatternComboBox.Name = "CandleStickPatternComboBox";
-            this.CandleStickPatternComboBox.Size = new System.Drawing.Size(121, 28);
+            this.CandleStickPatternComboBox.Size = new System.Drawing.Size(121, 24);
             this.CandleStickPatternComboBox.TabIndex = 2;
-            this.CandleStickPatternComboBox.Text = "Neutral Doji";
             this.CandleStickPatternComboBox.SelectedIndexChanged += new System.EventHandler(this.CandleStickPatternComboBox_SelectedIndexChanged);
             // 
             // StockDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = global::StockMarket.Properties.Resources.stock_background2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -167,10 +166,9 @@ namespace StockMarketProject
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DataChart);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.MaximizeBox = false;
             this.Name = "StockDataForm";
             this.Text = "Stock Data";
+            this.Load += new System.EventHandler(this.StockDataForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
