@@ -20,7 +20,7 @@ namespace StockMarketProject
             InitializeComponent();
             EndDatePicker.Value = DateTime.Now;
             EndDatePicker.MaxDate = DateTime.Now;
-            StartDatePicker.Value = DateTime.Now;
+            StartDatePicker.Value = DateTime.Parse("2021-11-30");//DateTime.Now;
             StartDatePicker.MaxDate = DateTime.Now;
             //System.Net.WebClient webClient = new System.Net.WebClient();
             //get the unix time for the period variables in the URL
