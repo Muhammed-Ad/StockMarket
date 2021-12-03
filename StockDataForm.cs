@@ -14,8 +14,8 @@ namespace StockMarketProject
     public partial class StockDataForm : Form
     {
         List<string> dataType = new List<string>();
-        private double max = 0;
-        private double min = -1;
+        private double maximum = 0;
+        private double minimum = -1;
 
         public StockDataForm()
         {
@@ -53,20 +53,20 @@ namespace StockMarketProject
 
                 for (int i = 1; i <= 4; i++)
                 {
-                    if (Double.Parse(dataPoints[i]) > max)
+                    if (Double.Parse(dataPoints[i]) > maximum)
                     {
-                        max = Double.Parse(dataPoints[i]);
+                        maximum = Double.Parse(dataPoints[i]);
                     }
 
-                    if (min == -1 || Double.Parse(dataPoints[i]) < min)
+                    if (minimum == -1 || Double.Parse(dataPoints[i]) < minimum)
                     {
-                        min = Double.Parse(dataPoints[i]);
+                        minimum = Double.Parse(dataPoints[i]);
                     }
                 }
                 //min = double.Parse(dataPoints[3]) < min ? double.Parse(dataPoints[3]) : min;
                 //DataChart.ChartAreas[0].AxisY.Minimum = min - min/20.0;
-                DataChart.ChartAreas["ChartArea1"].AxisY.Maximum = (int)(max + 10);
-                DataChart.ChartAreas["ChartArea1"].AxisY.Minimum = (int)(min - 10);
+                DataChart.ChartAreas["ChartArea1"].AxisY.Maximum = (int)(maximum + 10);
+                DataChart.ChartAreas["ChartArea1"].AxisY.Minimum = (int)(minimum - 10);
 
                 string dataDescription = "";
                 if(Math.Abs(close - open) < (tol * (high - low)))

@@ -137,9 +137,10 @@ namespace StockMarketProject
             // 
             // CandleStickPatternComboBox
             // 
+            this.CandleStickPatternComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CandleStickPatternComboBox.FormattingEnabled = true;
             this.CandleStickPatternComboBox.Items.AddRange(new object[] {
-            "Neutral",
+            "Neutral Doji",
             "Long-legged Doji",
             "Gravestone Doji",
             "Dragonfly Doji",
@@ -149,9 +150,9 @@ namespace StockMarketProject
             "Bearish Harami"});
             this.CandleStickPatternComboBox.Location = new System.Drawing.Point(426, 19);
             this.CandleStickPatternComboBox.Name = "CandleStickPatternComboBox";
-            this.CandleStickPatternComboBox.Size = new System.Drawing.Size(121, 21);
+            this.CandleStickPatternComboBox.Size = new System.Drawing.Size(121, 28);
             this.CandleStickPatternComboBox.TabIndex = 2;
-            this.CandleStickPatternComboBox.Text = "Neutral";
+            this.CandleStickPatternComboBox.Text = "Neutral Doji";
             this.CandleStickPatternComboBox.SelectedIndexChanged += new System.EventHandler(this.CandleStickPatternComboBox_SelectedIndexChanged);
             // 
             // StockDataForm
