@@ -41,7 +41,7 @@ namespace StockMarketProject
             DataChart.Series[0].Name = stockName;
             foreach (string line in DataRows)
             {
-                double tol = 0.1;
+                double tol = 0.2;
 
                 string[] dataPoints = line.Split(',');
                 if (dataPoints[0] == "Date") continue;
@@ -108,8 +108,8 @@ namespace StockMarketProject
                 //0 - hi, 1 - low, 2 - open, 3 - close
                 bool neutral = (dataDescription == "Doji") && (open < 1.2 * midpoint && open > 0.8 * midpoint) && (close < 1.2 * midpoint && close > 0.8 * midpoint);/*((open - (high + low) / 2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low))*/;
                 bool long_legged =  neutral && (range >= 50 * Math.Abs(open - close)); /*(dataDescription == "Doji") && ((open - (high + low)/2) < tol * (high - low)) && ((close - (high + low) / 2) < tol * (high - low))*/
-                bool dragonfly = (dataDescription == "Doji") && (open < 1.01 * high && open > 0.8 * high) && (close < 1.01 * high && close > 0.8 * high)/*(open - high < tol * high) && (close - high < tol * high)*/;
-                bool gravestone = (dataDescription == "Doji") && (open < 1.2 * low && open > 0.99 * low) && (close < 1.2 * low && close > 0.99 * low);
+                bool dragonfly = /*(dataDescription == "Doji") && *//*(open < 1.0001 * high && open >= 0.8 * high) && (close < 1.0001 * high && close >= 0.8 * high)*/(Math.Abs(open - high) < .4 * (range)) && (Math.Abs(close - high) < .4 * (range));
+                bool gravestone = /*(dataDescription == "Doji") &&*/ /*(open <= 1.1 * low && open > 0.99 * low) && (close <= 1.1 * low && close > 0.99 * low)*/(Math.Abs(open - low) < .4 * (range)) && (Math.Abs(close - low) < .4 * (range));
                 bool bullishMarubozu = (dataDescription == "Marubozu") && (close > open);
                 bool bearishMarubozu = (dataDescription == "Marubozu") && (close <= open);
                 bool bullishHarami = (dataDescription == "Harami") && (close > open);
@@ -119,10 +119,6 @@ namespace StockMarketProject
                 {
                     dataDescription = dataDescription.Insert(0, "Long-Legged ");
                 }
-                else if (neutral)
-                {
-                    dataDescription = dataDescription.Insert(0, "Neutral ");
-                }
                 else if (dragonfly)
                 {
                     dataDescription = dataDescription.Insert(0, "Dragonfly ");
@@ -131,6 +127,11 @@ namespace StockMarketProject
                 {
                     dataDescription = dataDescription.Insert(0, "Gravestone ");
                 }
+                else if (neutral)
+                {
+                    dataDescription = dataDescription.Insert(0, "Neutral ");
+                }
+                
 
                 if (bullishMarubozu)
                 {
@@ -180,15 +181,13 @@ namespace StockMarketProject
                 //dataPoints[5]; //Adj. Close
                 //dataPoints[6]; //Volume
             }
-            //Console.Write(output);
-            Console.Write(output);
+            
         }
 
         private void CandleStickPatternComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(CandleStickPatternComboBox.Text))
             {
-                dataTypeHash.Count();
                 DataChart.Annotations.Clear();
                 string candleType = CandleStickPatternComboBox.Text;
                 int size = -1;
