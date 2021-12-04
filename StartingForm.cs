@@ -8,12 +8,25 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using StockMarket.Properties;
+/*
+ * Project 3
+ * Member: Jason Truong, Muhammed Ademola
+ */
 
 namespace StockMarketProject
 {
+    /// <summary>
+    /// Class StartingForm
+    /// </summary>
     public partial class StartingForm : Form
     {
+        /// <summary>
+        /// StockdataForm onject
+        /// </summary>
         StockDataForm df;
+        /// <summary>
+        /// stockName 
+        /// </summary>
         string[] StockNames;
         /// <summary>
         /// initializes starting form and reads in S&P so user can choose
@@ -47,9 +60,8 @@ namespace StockMarketProject
                 //dataPoints[5]; //Adj. Close
                 //dataPoints[6]; //Volume
             }*/
-
-            int i = 0;
             
+            //analyze the source
             StockNames = Resources.StockNames.Split('\n');
             StockNames = StockNames.Select(row => {
                     var temp = row.Split(',');
@@ -124,7 +136,7 @@ namespace StockMarketProject
             }
              
             
-
+            
             string Interval = PeriodComboBox.Text == "Daily" ? "1d" : PeriodComboBox.Text == "Weekly" ? "1wk" : PeriodComboBox.Text == "Monthly" ? "1mo" : "1d";
             df = new StockDataForm(text, startTime.ToString(), endTime.ToString(), Interval);
             df.Text = text + " Data";

@@ -11,15 +11,39 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace StockMarketProject
 {
+    /// <summary>
+    /// class Stock Datat inherit Form
+    /// </summary>
     public partial class StockDataForm : Form
     {
+        /// <summary>
+        /// the Dictionary to store dataTypeHash
+        /// </summary>
         Dictionary<string, List<int>> dataTypeHash = new Dictionary<string, List<int>>();
+        /// <summary>
+        /// the list of dataType as string
+        /// </summary>
         List<string> dataType = new List<string>();
+        /// <summary>
+        /// the list of DataType as DataPoint Object
+        /// </summary>
         List<DataPoint> dataTypeObj = new List<DataPoint>();
+        /// <summary>
+        /// the list or rectangle to store the rectangle
+        /// </summary>
         List<RectangleAnnotation> rectList = new List<RectangleAnnotation>();
+        /// <summary>
+        /// maximum variable to store the max of the Y-axis
+        /// </summary>
         private double maximum = 0;
+        /// <summary>
+        /// minimum variable to store the max of the Y-axis
+        /// </summary>
         private double minimum = -1;
 
+        /// <summary>
+        /// for default constructor
+        /// </summary>
         public StockDataForm()
         {
             InitializeComponent();
@@ -123,6 +147,7 @@ namespace StockMarketProject
                 bool bullishHarami = (dataDescription == "Harami") && (close > open);
                 bool bearishHarami = (dataDescription == "Harami") && (close <= open);
 
+                //check each case
                 if (long_legged)
                 {
                     dataDescription = dataDescription.Insert(0, "Long-Legged ");
