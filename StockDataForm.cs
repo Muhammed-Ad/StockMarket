@@ -190,6 +190,12 @@ namespace StockMarketProject
         {
             if (!string.IsNullOrEmpty(CandleStickPatternComboBox.Text))
             {
+                double sumOffset = 0;
+                for(int i = 0; i < DataChart.Series[0].Points.Count(); i++)
+                {
+                    sumOffset += (DataChart.Series[0].Points[i].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[i].BorderWidth) / 2.0;
+                }
+                
                 DataChart.Annotations.Clear();
                 string candleType = CandleStickPatternComboBox.Text;
                 int size = -1;
@@ -245,19 +251,27 @@ namespace StockMarketProject
 
                         }
 
-                        bool isValid = temp1[0] > temp2[0] && temp1[1] < temp2[1];  //temp1 high is higher than temp2 and temp1 low is lower than temp 2
+                        bool isValid = temp1[0] >= .99 * temp2[0] && temp1[1] <= 1.01 * temp2[1];  //temp1 high is higher than temp2 and temp1 low is lower than temp 2;
                         //temp1bullish
                         bool temp2Bearish = temp2[2] > temp2[3]; //open > close
-
-                        if(!bullish == temp2Bearish && isValid)
+                        bool para = !bullish ? temp1[3] > temp2[2] && temp1[2] < temp2[3] /*temp1 closing is higher than temp2 opening  and temp1 opening lwer than temp 2 closing*/: temp1[3] < temp2[2] && temp1[2] > temp2[3] /*temp1 closing is lower than temp2 opening  and temp1 opening lwer than temp 2 closing*/;
+                        /*if (bullish)
                         {
-                            double xOffset = (DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth) / 2.0;
+                            para = temp1[3] > temp2[0] && temp1[2] < temp2[3];
+                        }*/
+                        if (!bullish == temp2Bearish && isValid && para)
+                        {
+                            double xOffset = sumOffset / (DataChart.Series[0].Points.Count() / 2.0);
+                            double yOffset = Math.Abs(rectList[index].Height - rectList[index + 1].Height) /*/ 2.0*/;
                             //if(index + 1)
                             double heightUpper = DataChart.Series[0].Points[index].YValues[0] > DataChart.Series[0].Points[index + 1].YValues[0] ? DataChart.Series[0].Points[index].YValues[0] : DataChart.Series[0].Points[index + 1].YValues[0];
                             double heightLower = DataChart.Series[0].Points[index].YValues[1] < DataChart.Series[0].Points[index + 1].YValues[1] ? DataChart.Series[0].Points[index].YValues[1] : DataChart.Series[0].Points[index + 1].YValues[1];
-                            rectList[index].Width = 4 * (DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth);/*+= DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth;*/
+
+                            rectList[index].Width = 3.5 * (DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth);/*+= DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth;*/
+                            rectList[index].Height =  (heightUpper - heightLower); 
                             DataChart.Annotations.Add(rectList[index]);
-                            rectList[index].AnchorOffsetX = 2.2*xOffset;
+                            rectList[index].AnchorOffsetX = 1.5 * xOffset;
+                            //rectList[index].AnchorOffsetY = yOffset;
                             numFound++;
                         }
                     }
