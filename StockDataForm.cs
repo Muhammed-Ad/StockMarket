@@ -95,7 +95,7 @@ namespace StockMarketProject
                 {
                     dataDescription += "Doji";
                 }
-                else if(Math.Abs(close - open) >= (1 - (4 * tol)) * range/*Math.Abs(high - low)*//*Math.Abs(close - high) < (tol * (high - low)) && Math.Abs(open - low) < (tol * (high - low))*/)
+                else if(Math.Abs(close - open) >= (1 - (2 * tol)) * range/*Math.Abs(high - low)*//*Math.Abs(close - high) < (tol * (high - low)) && Math.Abs(open - low) < (tol * (high - low))*/)
                 {
                     dataDescription += "Marubozu";
                 }
@@ -144,14 +144,14 @@ namespace StockMarketProject
                     dataDescription = dataDescription.Insert(0, "Bearish ");
                 }
 
-                /*if (bullishHarami)
+                if (bullishHarami)
                 {
                     dataDescription = dataDescription.Insert(0, "Bullish ");
                 }
                 else if (bearishHarami)
                 {
                     dataDescription = dataDescription.Insert(0, "Bearish ");
-                }*/
+                }
 
                 dataType.Add(dataDescription);
                 if (dataTypeHash.ContainsKey(dataDescription)){
@@ -232,29 +232,41 @@ namespace StockMarketProject
                         double[] temp2;
                         if(index + 1 < dataTypeObj.Count())
                         {
-                            if(dataType[index + 1] != "")
+                            /*if(dataType[index + 1] != "")
                             {
                                 continue;
-                            }
+                            }*/
                             temp2 = dataTypeObj[index + 1].YValues;
                         }
                         else
                         {
-                            break;
+                            MessageBox.Show("No Candlesticks of type " + candleType + " currently available ", "Notice!");
+                            return;
+
                         }
 
                         bool isValid = temp1[0] > temp2[0] && temp1[1] < temp2[1];  //temp1 high is higher than temp2 and temp1 low is lower than temp 2
                         bool temp2Bearish = temp2[2] > temp2[3]; //open > close
 
-                        if(bullish == temp2Bearish)
+                        if(bullish == temp2Bearish && isValid)
                         {
-                            rectList[index].Width *= 2;
+                            double xOffset = (DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth) / 2.0;
+                            //if(index + 1)
+                            double heightUpper = DataChart.Series[0].Points[index].YValues[0] > DataChart.Series[0].Points[index + 1].YValues[0] ? DataChart.Series[0].Points[index].YValues[0] : DataChart.Series[0].Points[index + 1].YValues[0];
+                            double heightLower = DataChart.Series[0].Points[index].YValues[1] < DataChart.Series[0].Points[index + 1].YValues[1] ? DataChart.Series[0].Points[index].YValues[1] : DataChart.Series[0].Points[index + 1].YValues[1];
+                            rectList[index].Width *= 3.5;/*+= DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth;*/
                             DataChart.Annotations.Add(rectList[index]);
-                            //rectList[index].AnchorOffsetX = 
+                            rectList[index].AnchorOffsetX = 3*xOffset;
+                            numFound++;
                         }
                     }
+                    if(numFound == 0)
+                    {
+                        MessageBox.Show("No Candlesticks of type " + candleType + " currently available ", "Notice!");
+                        return;
+                    }
+                    
 
-                   
                 }
                 DataChart.Update();
             }
