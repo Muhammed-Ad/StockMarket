@@ -26,7 +26,13 @@ namespace StockMarketProject
             //string url = "https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=1605639981&period2=1637175981&interval=1d&events=history&includeAdjustedClose=true";
             //string output = webClient.DownloadString(url);
         }
-
+        /// <summary>
+        /// The constructor that gets data fromyahoo website to use to populate stock. It also categorizes the candles of the stock
+        /// </summary>
+        /// <param name="stockName"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="interval"></param>
         public StockDataForm(string stockName, string start, string end, string interval)
         {
             //start and end time must be in unix epoch time
@@ -185,7 +191,11 @@ namespace StockMarketProject
             }
             
         }
-
+        /// <summary>
+        /// when selected candelstick type is changed, function is called to update the chart of and highlight the specific types 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CandleStickPatternComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(CandleStickPatternComboBox.Text))
@@ -287,8 +297,15 @@ namespace StockMarketProject
             }
             
         }
-
-        private void calcRectangle(int index, bool bullish = false, int heightAdj = 0, int widthAdj = 0, int anchorAdj = 0)
+        /// <summary>
+        /// calculate the rectnagle that should be drawn around specific candlestick
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="bullish"></param>
+        /// <param name="heightAdj"></param>
+        /// <param name="widthAdj"></param>
+        /// <param name="anchorAdj"></param>
+        private void calcRectangle(int index, bool bullish = false)
         {
             RectangleAnnotation rectangleAnnotation = new RectangleAnnotation();
 

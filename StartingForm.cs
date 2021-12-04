@@ -15,6 +15,9 @@ namespace StockMarketProject
     {
         StockDataForm df;
         string[] StockNames;
+        /// <summary>
+        /// initializes starting form and reads in S&P so user can choose
+        /// </summary>
         public StartingForm()
         {
             InitializeComponent();
@@ -60,7 +63,11 @@ namespace StockMarketProject
             //--streamReader
             //string url = https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=1605639981&period2=1637175981&interval=1d&events=history&includeAdjustedClose=true
         }
-
+        /// <summary>
+        /// Loads data with specified parameters, does error checking
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadDataButton_Click(object sender, EventArgs e)
         {
             ///Validate that input field as put in

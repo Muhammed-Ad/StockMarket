@@ -94,7 +94,8 @@ namespace StockMarketProject
             legend1.TitleBackColor = System.Drawing.Color.Transparent;
             legend1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DataChart.Legends.Add(legend1);
-            this.DataChart.Location = new System.Drawing.Point(0, 59);
+            this.DataChart.Location = new System.Drawing.Point(0, 73);
+            this.DataChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DataChart.Name = "DataChart";
             this.DataChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.DataChart.PaletteCustomColors = new System.Drawing.Color[] {
@@ -115,7 +116,7 @@ namespace StockMarketProject
             series1.YValueMembers = "High,Low,Open,Close";
             series1.YValuesPerPoint = 4;
             this.DataChart.Series.Add(series1);
-            this.DataChart.Size = new System.Drawing.Size(859, 528);
+            this.DataChart.Size = new System.Drawing.Size(1145, 650);
             this.DataChart.TabIndex = 0;
             this.DataChart.Text = "Data Chart";
             title1.BackColor = System.Drawing.Color.Transparent;
@@ -129,9 +130,10 @@ namespace StockMarketProject
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(189, 21);
+            this.label1.Location = new System.Drawing.Point(252, 26);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 20);
+            this.label1.Size = new System.Drawing.Size(185, 25);
             this.label1.TabIndex = 1;
             this.label1.Text = "CandleStick Pattern";
             // 
@@ -148,25 +150,27 @@ namespace StockMarketProject
             "Bearish Marubozu",
             "Bullish Harami",
             "Bearish Harami"});
-            this.CandleStickPatternComboBox.Location = new System.Drawing.Point(350, 19);
+            this.CandleStickPatternComboBox.Location = new System.Drawing.Point(467, 23);
+            this.CandleStickPatternComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CandleStickPatternComboBox.Name = "CandleStickPatternComboBox";
-            this.CandleStickPatternComboBox.Size = new System.Drawing.Size(212, 28);
+            this.CandleStickPatternComboBox.Size = new System.Drawing.Size(358, 33);
             this.CandleStickPatternComboBox.TabIndex = 2;
             this.CandleStickPatternComboBox.SelectedIndexChanged += new System.EventHandler(this.CandleStickPatternComboBox_SelectedIndexChanged);
             // 
             // StockDataForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = global::StockMarket.Properties.Resources.stock_background2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(857, 585);
+            this.ClientSize = new System.Drawing.Size(1143, 720);
             this.Controls.Add(this.CandleStickPatternComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DataChart);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "StockDataForm";
             this.Text = "Stock Data";
