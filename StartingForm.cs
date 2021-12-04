@@ -130,7 +130,5 @@ namespace StockMarketProject
             df.Text = text + " Data";
             df.Show();
         }
-
-       
     }
 }
