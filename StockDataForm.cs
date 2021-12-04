@@ -101,7 +101,7 @@ namespace StockMarketProject
                 {
                     dataDescription += "Doji";
                 }
-                else if(Math.Abs(close - open) >= (1 - (2 * tol)) * range/*Math.Abs(high - low)*//*Math.Abs(close - high) < (tol * (high - low)) && Math.Abs(open - low) < (tol * (high - low))*/)
+                else if(Math.Abs(close - open) >= (1 - (2.5 * tol)) * range/*Math.Abs(high - low)*//*Math.Abs(close - high) < (tol * (high - low)) && Math.Abs(open - low) < (tol * (high - low))*/)
                 {
                     dataDescription += "Marubozu";
                 }
