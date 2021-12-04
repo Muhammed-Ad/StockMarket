@@ -53,11 +53,13 @@ namespace StockMarketProject
                 DateTime date = DateTime.Parse(dataPoints[0]);
                 DataPoint temp = new DataPoint();
                 temp.SetValueXY(date.ToBinary(), high, low, open, close);
+                //temp.SetValueXY(date, high, low, open, close);
+
                 dataTypeObj.Add(temp);
                 //double dateDouble = double.Parse(date.ToString());
                 bool bullish = close > open;
 
-                DataChart.Series[0].Points.AddXY(date, high, low, open, close);
+                DataChart.Series[0].Points.AddXY(dataPoints[0], high, low, open, close);
 
                 //dataPoints[0]; //Date
                 //dataPoints[1]; //Open
@@ -81,8 +83,8 @@ namespace StockMarketProject
                 }
                 //min = double.Parse(dataPoints[3]) < min ? double.Parse(dataPoints[3]) : min;
                 //DataChart.ChartAreas[0].AxisY.Minimum = min - min/20.0;
-                DataChart.ChartAreas["ChartArea1"].AxisY.Maximum = (int)(maximum + 10);
-                DataChart.ChartAreas["ChartArea1"].AxisY.Minimum = (int)(minimum - 10);
+                DataChart.ChartAreas["ChartArea1"].AxisY.Maximum = (int)(maximum + 5);
+                DataChart.ChartAreas["ChartArea1"].AxisY.Minimum = (int)(minimum - 5);
 
                 string dataDescription = "";
 
