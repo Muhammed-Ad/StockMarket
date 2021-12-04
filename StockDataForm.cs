@@ -97,7 +97,7 @@ namespace StockMarketProject
                 double range = high - low;
                 double midpoint = (high + low) / 2;
                 
-                if(Math.Abs(close - open) <= (tol * (range)))
+                if(Math.Abs(close - open) <= (1.5 * tol * (range)))
                 {
                     dataDescription += "Doji";
                 }
