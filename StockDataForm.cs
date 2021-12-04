@@ -146,11 +146,11 @@ namespace StockMarketProject
 
                 if (bullishHarami)
                 {
-                    dataDescription = dataDescription.Insert(0, "Bullish ");
+                    dataDescription = dataDescription.Insert(0, "Bearish ");
                 }
                 else if (bearishHarami)
                 {
-                    dataDescription = dataDescription.Insert(0, "Bearish ");
+                    dataDescription = dataDescription.Insert(0, "Bullish ");
                 }
 
                 dataType.Add(dataDescription);
@@ -246,17 +246,18 @@ namespace StockMarketProject
                         }
 
                         bool isValid = temp1[0] > temp2[0] && temp1[1] < temp2[1];  //temp1 high is higher than temp2 and temp1 low is lower than temp 2
+                        //temp1bullish
                         bool temp2Bearish = temp2[2] > temp2[3]; //open > close
 
-                        if(bullish == temp2Bearish && isValid)
+                        if(!bullish == temp2Bearish && isValid)
                         {
                             double xOffset = (DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth) / 2.0;
                             //if(index + 1)
                             double heightUpper = DataChart.Series[0].Points[index].YValues[0] > DataChart.Series[0].Points[index + 1].YValues[0] ? DataChart.Series[0].Points[index].YValues[0] : DataChart.Series[0].Points[index + 1].YValues[0];
                             double heightLower = DataChart.Series[0].Points[index].YValues[1] < DataChart.Series[0].Points[index + 1].YValues[1] ? DataChart.Series[0].Points[index].YValues[1] : DataChart.Series[0].Points[index + 1].YValues[1];
-                            rectList[index].Width *= 3.5;/*+= DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth;*/
+                            rectList[index].Width = 4 * (DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth);/*+= DataChart.Series[0].Points[index].LabelBorderWidth - 1.5 * DataChart.Series[0].Points[index].BorderWidth;*/
                             DataChart.Annotations.Add(rectList[index]);
-                            rectList[index].AnchorOffsetX = 3*xOffset;
+                            rectList[index].AnchorOffsetX = 2.2*xOffset;
                             numFound++;
                         }
                     }
